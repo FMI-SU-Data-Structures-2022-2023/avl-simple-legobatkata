@@ -2,6 +2,13 @@
 #include <iostream>
 
 
+void releaseAVL(Node* node){
+    if(node == nullptr) return;
+    releaseAVL(node->left);
+    releaseAVL(node->right);
+    delete node;
+}
+
 void printBTRec(const std::string& prefix, const Node* node, bool isRight){
     if( node != nullptr ){
         std::cout << prefix;
@@ -121,10 +128,15 @@ Node* removeAVL(Node* node, int value){
     return rebalanceAVL(node, value);
 }
 
+///
+///
+/// arr to tree
 
-void releaseAVL(Node* node){
-    if(node == nullptr) return;
-    releaseAVL(node->left);
-    releaseAVL(node->right);
-    delete node;
+Node* arrToTree(const int* sorted_data, int size){
+    if(size <= 0) return nullptr;
+    Node* node = new Node(sorted_data[size/2]);
+    node->left = arrToTree(sorted_data, size/2);
+    node->right = arrToTree(sorted_data + (size/2) + 1, (size/2) + (size%2 - 1));
+    return node;
 }
+

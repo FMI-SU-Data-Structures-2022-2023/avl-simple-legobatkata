@@ -3,7 +3,11 @@
 using namespace std;
 
 int main() {
+    int arr[] = {1, 2, 3, 4, 5, 6};
+    Node* t = arrToTree(arr, 6);
+    printBT(t);
 
+    /*
     Node* a = nullptr;
 
     a = insertAVL(a, 1);
@@ -35,7 +39,6 @@ int main() {
     printBT(a);
     cout<<endl<<endl;
 
-
     a = insertAVL(a, 101);
     printBT(a);
     cout<<endl<<endl;
@@ -49,7 +52,7 @@ int main() {
     cout<<endl<<endl;
 
     releaseAVL(a);
-
+    */
     //cout<<endl<<(a->right->left == nullptr)<<endl;
     //cout<<endl<<(a->left->right->data)<<endl;
 
