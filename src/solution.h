@@ -15,3 +15,5 @@ void printBT(const Node* node);
 
 Node* insertAVL(Node* node, int value);
 Node* removeAVL(Node* node, int value);
+
+void releaseAVL(Node* node);

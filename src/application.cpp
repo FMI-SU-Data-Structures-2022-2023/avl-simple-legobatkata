@@ -48,6 +48,8 @@ int main() {
     printBT(a);
     cout<<endl<<endl;
 
+    releaseAVL(a);
+
     //cout<<endl<<(a->right->left == nullptr)<<endl;
     //cout<<endl<<(a->left->right->data)<<endl;
 

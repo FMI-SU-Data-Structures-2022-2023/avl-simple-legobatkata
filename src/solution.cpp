@@ -120,3 +120,11 @@ Node* removeAVL(Node* node, int value){
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
     return rebalanceAVL(node, value);
 }
+
+
+void releaseAVL(Node* node){
+    if(node == nullptr) return;
+    releaseAVL(node->left);
+    releaseAVL(node->right);
+    delete node;
+}
