@@ -25,6 +25,29 @@ int main() {
     printBT(a);
     cout<<endl<<endl;
 
+
+    a = removeAVL(a, 2);
+    printBT(a);
+    cout<<endl<<endl;
+
+
+    a = insertAVL(a, 99);
+    printBT(a);
+    cout<<endl<<endl;
+
+
+    a = insertAVL(a, 101);
+    printBT(a);
+    cout<<endl<<endl;
+
+    a = insertAVL(a, 120);
+    printBT(a);
+    cout<<endl<<endl;
+
+    a = insertAVL(a, 150);
+    printBT(a);
+    cout<<endl<<endl;
+
     //cout<<endl<<(a->right->left == nullptr)<<endl;
     //cout<<endl<<(a->left->right->data)<<endl;
 

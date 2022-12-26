@@ -14,4 +14,4 @@ void printBTRec(const std::string& prefix, const Node* node, bool isLeft);
 void printBT(const Node* node);
 
 Node* insertAVL(Node* node, int value);
-
+Node* removeAVL(Node* node, int value);
