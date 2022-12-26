@@ -2,6 +2,22 @@
 #include <iostream>
 
 
+///
+///
+/// arr to tree
+
+Node* arrToTree(const int* sorted_data, int size){
+    if(size <= 0) return nullptr;
+    Node* node = new Node(sorted_data[size/2]);
+    node->left = arrToTree(sorted_data, size/2);
+    node->right = arrToTree(sorted_data + (size/2) + 1, (size/2) + (size%2 - 1));
+    return node;
+}
+
+///
+///
+/// release
+
 void releaseAVL(Node* node){
     if(node == nullptr) return;
     releaseAVL(node->left);
@@ -9,21 +25,38 @@ void releaseAVL(Node* node){
     delete node;
 }
 
+///
+///
+/// tree to arr
+
+int treeToArr(Node* node, int* result){
+    if(node == nullptr) return 0;
+    int resLen = 1 + treeToArr(node->left, result+1) + treeToArr(node->right, result+1);
+    return resLen;
+}
+
+///
+///
+/// exercise to print trees
+
 void printBTRec(const std::string& prefix, const Node* node, bool isRight){
     if( node != nullptr ){
-        std::cout << prefix;
-        std::cout << (isRight ? "├── " : "└── " );
-        std::cout << node->data << std::endl;  // print the value of the node
+        cout << prefix;
+        cout << (isRight ? "├── " : "└── " );
+        cout << node->data << std::endl;  // print the value of the node
 
-        // enter the next tree level - left and right branch
+        // if a node is a dead end go back
         if(node->left == nullptr && node->right == nullptr) return;
+
+        // if a node has at least one child enter the next tree level - left and right branch
         printBTRec( prefix + (isRight ? "│   " : "    "), node->right, true);
-        //printBTRec( prefix + (isRight ? "│   " : "    "), node->right, node->left != nullptr);
         printBTRec( prefix + (isRight ? "│   " : "    "), node->left, false);
     } else {
-        std::cout << prefix;
-        std::cout << (isRight ? "├── " : "└── " );
-        std::cout << "x" << std::endl;  // print the value of the node
+        cout << prefix;
+        cout << (isRight ? "├── " : "└── " );
+        cout << "x" << std::endl;
+        // print x on nullptr when a node has a single child
+        // if I don't do this then it's not possible to tell whether a single child is left or right
     }
 }
 void printBT(const Node* node){
@@ -32,7 +65,7 @@ void printBT(const Node* node){
 
 ///
 ///
-/// insert
+/// exercise for avl tree insertion/deletion
 
 int getHeight(Node* node){
     if(node == nullptr) return 0;
@@ -126,17 +159,5 @@ Node* removeAVL(Node* node, int value){
     if(node == nullptr) return node;
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
     return rebalanceAVL(node, value);
-}
-
-///
-///
-/// arr to tree
-
-Node* arrToTree(const int* sorted_data, int size){
-    if(size <= 0) return nullptr;
-    Node* node = new Node(sorted_data[size/2]);
-    node->left = arrToTree(sorted_data, size/2);
-    node->right = arrToTree(sorted_data + (size/2) + 1, (size/2) + (size%2 - 1));
-    return node;
 }
 

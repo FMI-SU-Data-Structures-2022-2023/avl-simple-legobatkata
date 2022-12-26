@@ -17,4 +17,5 @@ Node* insertAVL(Node* node, int value);
 Node* removeAVL(Node* node, int value);
 
 Node* arrToTree(const int* sorted_data, int size);
+int treeToArr(Node* node, int* result);
 void releaseAVL(Node* node);

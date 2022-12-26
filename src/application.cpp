@@ -3,57 +3,21 @@
 using namespace std;
 
 int main() {
-    int arr[] = {1, 2, 3, 4, 5, 6};
-    Node* t = arrToTree(arr, 6);
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    int len1 = 16;
+
+    for(int i=0; i<len1; i++) cout<<arr[i]<<" ";
+    cout<<endl<<endl;
+
+    Node* t = arrToTree(arr, len1);
     printBT(t);
 
-    /*
-    Node* a = nullptr;
+    int* res = new int[50];
+    int len2 = treeToArr(t, res);
 
-    a = insertAVL(a, 1);
-    printBT(a);
-    cout<<endl<<endl;
-    a = insertAVL(a, 2);
-    printBT(a);
-    cout<<endl<<endl;
-    a = insertAVL(a, 3);
-    printBT(a);
-    cout<<endl<<endl;
-    a = insertAVL(a, 4);
-    printBT(a);
-    cout<<endl<<endl;
-    a = insertAVL(a, 5);
-    printBT(a);
-    cout<<endl<<endl;
-    a = insertAVL(a, 6);
-    printBT(a);
+    for(int i=0; i<len2; i++) cout<<arr[i]<<" ";
     cout<<endl<<endl;
 
-
-    a = removeAVL(a, 2);
-    printBT(a);
-    cout<<endl<<endl;
-
-
-    a = insertAVL(a, 99);
-    printBT(a);
-    cout<<endl<<endl;
-
-    a = insertAVL(a, 101);
-    printBT(a);
-    cout<<endl<<endl;
-
-    a = insertAVL(a, 120);
-    printBT(a);
-    cout<<endl<<endl;
-
-    a = insertAVL(a, 150);
-    printBT(a);
-    cout<<endl<<endl;
-
-    releaseAVL(a);
-    */
-    //cout<<endl<<(a->right->left == nullptr)<<endl;
-    //cout<<endl<<(a->left->right->data)<<endl;
+    releaseAVL(t);
 
 }
