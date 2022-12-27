@@ -66,3 +66,113 @@ TEST_CASE("treeIsAVL recognises when a tree isn't balanced due to wrong order of
     REQUIRE_FALSE(treeIsAVL(a));
     releaseAVL(a);
 }
+
+TEST_CASE("insertAVL properly inserts a single node") {
+    Node* a = nullptr;
+    a = insertAVL(a, 5);
+
+    REQUIRE(a != nullptr);
+    REQUIRE(a->data == 5);
+    REQUIRE(a->height == 1);
+    REQUIRE(treeIsAVL(a));
+    releaseAVL(a);
+}
+
+TEST_CASE("insertAVL properly inserts a multiple nodes") {
+    Node* a = nullptr;
+    a = insertAVL(a, 1);
+    a = insertAVL(a, 2);
+    a = insertAVL(a, 3);
+
+    REQUIRE(a != nullptr);
+    REQUIRE(a->left != nullptr);
+    REQUIRE(a->right != nullptr);
+
+    REQUIRE(a->data == 2);
+    REQUIRE(a->left->data == 1);
+    REQUIRE(a->right->data == 3);
+
+    REQUIRE(a->height == 2);
+    REQUIRE(a->right->height == 1);
+    REQUIRE(a->left->height == 1);
+
+    REQUIRE(treeIsAVL(a));
+    releaseAVL(a);
+}
+
+TEST_CASE("longer scenario to test if multiple insertAVL and removeAVL result in a proper avl tree") {
+    Node* a = nullptr;
+    a = insertAVL(a, 1);
+    a = insertAVL(a, 2);
+    a = insertAVL(a, 3);
+    a = insertAVL(a, 4);
+    a = insertAVL(a, 5);
+    a = insertAVL(a, 6);
+
+
+    REQUIRE(treeIsAVL(a));
+    REQUIRE(a->data == 4);
+    REQUIRE(a->left->data == 2);
+    REQUIRE(a->left->left->data == 1);
+    REQUIRE(a->left->right->data == 3);
+    REQUIRE(a->right->data == 5);
+    REQUIRE(a->right->right->data == 6);
+
+    REQUIRE(a->height == 3);
+    REQUIRE(a->left->height == 2);
+    REQUIRE(a->left->left->height == 1);
+    REQUIRE(a->left->right->height == 1);
+    REQUIRE(a->right->height == 2);
+    REQUIRE(a->right->right->height == 1);
+
+    a = removeAVL(a, 2);
+
+    REQUIRE(treeIsAVL(a));
+    REQUIRE(a->data == 4);
+    REQUIRE(a->left->data == 1);
+    REQUIRE(a->left->left == nullptr);
+    REQUIRE(a->left->right->data == 3);
+    REQUIRE(a->right->data == 5);
+    REQUIRE(a->right->right->data == 6);
+
+    REQUIRE(a->height == 3);
+    REQUIRE(a->left->height == 2);
+    REQUIRE(a->left->right->height == 1);
+    REQUIRE(a->right->height == 2);
+    REQUIRE(a->right->right->height == 1);
+
+    a = insertAVL(a, 10);
+
+    REQUIRE(treeIsAVL(a));
+    REQUIRE(a->data == 4);
+    REQUIRE(a->left->data == 1);
+    REQUIRE(a->left->right->data == 3);
+    REQUIRE(a->right->data == 6);
+    REQUIRE(a->right->right->data == 10);
+    REQUIRE(a->right->left->data == 5);
+
+    REQUIRE(a->height == 3);
+    REQUIRE(a->left->height == 2);
+    REQUIRE(a->left->right->height == 1);
+    REQUIRE(a->right->height == 2);
+    REQUIRE(a->right->right->height == 1);
+    REQUIRE(a->right->left->height == 1);
+
+    a = removeAVL(a, 6);
+
+    REQUIRE(treeIsAVL(a));
+    REQUIRE(a->data == 4);
+    REQUIRE(a->left->data == 1);
+    REQUIRE(a->left->right->data == 3);
+    REQUIRE(a->right->data == 5);
+    REQUIRE(a->right->right->data == 10);
+    REQUIRE(a->right->left == nullptr);
+
+    REQUIRE(a->height == 3);
+    REQUIRE(a->left->height == 2);
+    REQUIRE(a->left->right->height == 1);
+    REQUIRE(a->right->height == 2);
+    REQUIRE(a->right->right->height == 1);
+
+    releaseAVL(a);
+}
