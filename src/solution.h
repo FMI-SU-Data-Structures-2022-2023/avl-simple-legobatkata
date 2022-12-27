@@ -15,6 +15,7 @@ void printBT(const Node* node);
 
 Node* insertAVL(Node* node, int value);
 Node* removeAVL(Node* node, int value);
+bool treeIsAVL(Node* node);
 
 Node* arrToTree(const int* sorted_data, int size);
 int treeToArr(Node* node, int* result);

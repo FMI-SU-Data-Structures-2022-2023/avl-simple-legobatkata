@@ -161,3 +161,16 @@ Node* removeAVL(Node* node, int value){
     return rebalanceAVL(node, value);
 }
 
+///
+///
+/// exercise to check if tree is avl
+
+bool treeIsAVL(Node* node){
+    if(node == nullptr) return true;
+    //if(node->left == nullptr && node->right == nullptr) return true;
+    if(node->left != nullptr && node->left->data >= node->data) return false;
+    if(node->right != nullptr && node->right->data < node->data) return false;
+    int balance = getBalance(node);
+    if(balance < -1 || balance > 1) return false;
+    return treeIsAVL(node->left) && treeIsAVL(node->right);
+}
