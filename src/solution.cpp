@@ -130,8 +130,9 @@ Node* insertAVL(Node* node, int value){
     else if(value < node->data) node->left = insertAVL(node->left, value);
     else node->right = insertAVL(node->right, value);
 
+    node = rebalanceAVL(node, value);
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
-    return rebalanceAVL(node, value);
+    return node;
 }
 
 Node* removeAVL(Node* node, int value){
@@ -157,8 +158,9 @@ Node* removeAVL(Node* node, int value){
         }
     }
     if(node == nullptr) return node;
+    node = rebalanceAVL(node, value);
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
-    return rebalanceAVL(node, value);
+    return node;
 }
 
 ///
