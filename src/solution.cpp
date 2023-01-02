@@ -1,5 +1,6 @@
 #include "solution.h"
 #include <iostream>
+#include <exception>
 
 
 ///
@@ -126,7 +127,14 @@ Node* rebalanceAVL(Node* node, int value){
 }
 
 Node* insertAVL(Node* node, int value){
-    if(node == nullptr) return new Node(value);
+    if(node == nullptr) {
+        try{
+            Node* result = new Node(value);
+            return result;
+        }catch (exception e){
+            return node;
+        }
+    }
     else if(value < node->data) node->left = insertAVL(node->left, value);
     else node->right = insertAVL(node->right, value);
 
